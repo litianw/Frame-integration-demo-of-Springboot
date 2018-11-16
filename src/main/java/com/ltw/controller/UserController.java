@@ -1,5 +1,6 @@
 package com.ltw.controller;
 
+import java.net.MalformedURLException;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -10,7 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ltw.common.ws.GetPhoneAddress;
 import com.ltw.entity.User;
 import com.ltw.service.UserService;
 
@@ -46,6 +49,11 @@ public class UserController {
 		List<User> list =userService.findAll();
 		model.addAttribute("list", list);
 		return "findAll";
+	}
+	@RequestMapping(value="/findPhone")
+	@ResponseBody
+	public String findPhone(String phone) throws MalformedURLException {
+		return GetPhoneAddress.getPhoneAddress(phone);
 	}
 	
 }
